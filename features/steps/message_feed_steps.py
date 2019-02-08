@@ -35,3 +35,11 @@ def assert_cannot_see_message(context, message, author):
     expected = dict(author=author, message=message)
 
     assert expected not in feed, f'{expected} should not be in {feed}'
+
+
+@then('they can see the message "{message}"+@+{user} by {author}')
+def assert_can_see_direct_message(context, message, user, author):
+    feed = context.feed
+    expected = dict(author=author, message=message+'@'+user)
+
+    assert expected in feed, f'{expected} should be in {feed}'
